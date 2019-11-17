@@ -199,13 +199,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="50dp"/>
-            <com.triggertrap.seekarc.SeekArc
-                android:id="@+id/seekArc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="30dp"
-                app:roundEdges="true"></com.triggertrap.seekarc.SeekArc>
+            
 
         </TableRow>
 

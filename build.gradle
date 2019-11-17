@@ -25,6 +25,16 @@ allprojects {
     }
 }
 
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url "http://ftp1.digi.com/support/m-repo"
+        }
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
