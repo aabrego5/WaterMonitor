@@ -31,12 +31,12 @@ public class HomePage extends AppCompatActivity {
 
     // Constants.
     // TODO: replace with the Bluetooth MAC address of your XBee device.
-    private static final String BLE_MAC_ADDR = "08:6B:D7:52:B3:7B";
+    //private static final String BLE_MAC_ADDR = "08:6B:D7:52:B3:7B";
     // TODO: replace with the Bluetooth password of your XBee device.
-    private static final String BLE_PASSWORD = "1234";
+    //private static final String BLE_PASSWORD = "1234";
 
     // Variables.
-    private XBeeBLEDevice myXBeeDevice = null;
+    //private XBeeBLEDevice myXBeeDevice = null;
 
 
     @Override
@@ -74,25 +74,25 @@ public class HomePage extends AppCompatActivity {
 
         // Instantiate the XBeeDevice object and open the connection.
         // This process blocks the UI, so it must be done in a different thread.
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // Instantiate an XBee BLE device with the Bluetooth MAC and password.
-                myXBeeDevice = new XBeeBLEDevice(HomePage.this, BLE_MAC_ADDR, BLE_PASSWORD);
-                try {
-                    // Open the connection with the device.
-                    myXBeeDevice.open();
-
-                    showToastMessage("Device open: " + myXBeeDevice.toString());
-                } catch (BluetoothAuthenticationException e) {
-                    // Error authenticating the device, check password.
-                    showToastMessage("Invalid password: " + e.getMessage());
-                } catch (XBeeException e) {
-                    // Error opening the connection with the device.
-                    showToastMessage("Could not open device: " + e.getMessage());
-                }
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                // Instantiate an XBee BLE device with the Bluetooth MAC and password.
+//                myXBeeDevice = new XBeeBLEDevice(HomePage.this, BLE_MAC_ADDR, BLE_PASSWORD);
+//                try {
+//                    // Open the connection with the device.
+//                    myXBeeDevice.open();
+//
+//                    showToastMessage("Device open: " + myXBeeDevice.toString());
+//                } catch (BluetoothAuthenticationException e) {
+//                    // Error authenticating the device, check password.
+//                    showToastMessage("Invalid password: " + e.getMessage());
+//                } catch (XBeeException e) {
+//                    // Error opening the connection with the device.
+//                    showToastMessage("Could not open device: " + e.getMessage());
+//                }
+//            }
+//        }).start();
 
     }
     public void onChartSingleTapped(MotionEvent me){
@@ -105,12 +105,12 @@ public class HomePage extends AppCompatActivity {
      * @param message The message to show.
      */
     private void showToastMessage(final String message) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(HomePage.this, message, Toast.LENGTH_LONG).show();
-            }
-        });
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Toast.makeText(HomePage.this, message, Toast.LENGTH_LONG).show();
+//            }
+//        });
     }
 }
 

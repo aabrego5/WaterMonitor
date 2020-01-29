@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WelcomeScreen">
+    tools:context=".WelcomeScreen"
+    android:background="@drawable/water_monitor_drop">
 
     <Button
         android:id="@+id/welcome_button"
-        android:layout_width="337dp"
-        android:layout_height="618dp"
+        android:layout_width="410dp"
+        android:layout_height="728dp"
+        android:background="@android:drawable/divider_horizontal_bright"
         android:text="Welcome"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
