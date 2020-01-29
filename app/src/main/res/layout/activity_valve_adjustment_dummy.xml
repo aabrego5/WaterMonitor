@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ValveAdjustmentPage">
+
+    <TextView
+        android:id="@+id/valve_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#A9CCEB"
+        android:gravity="center_horizontal"
+        android:text="Valve Adjustment"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/valve1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bathroom Sink:"
+        android:textSize="24sp" />
+
+    <SeekBar
+        android:id="@+id/seekBar3"
+        android:layout_width="match_parent"
+        android:layout_height="58dp" />
+
+    <TextView
+        android:id="@+id/valve2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#A9CCEB"
+        android:text="Kitchen Sink:"
+        android:textSize="24sp" />
+
+    <SeekBar
+        android:id="@+id/seekBar4"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="#A9CCEB" />
+
+    <TextView
+        android:id="@+id/valve3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Shower:"
+        android:textSize="24sp" />
+
+    <SeekBar
+        android:id="@+id/seekBar5"
+        android:layout_width="match_parent"
+        android:layout_height="58dp" />
+
+    <TextView
+        android:id="@+id/valve4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#A9CCEB"
+        android:text="Toilet:"
+        android:textSize="24sp" />
+
+    <SeekBar
+        android:id="@+id/seekBar6"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="#A9CCEB" />
+
+</LinearLayout>
