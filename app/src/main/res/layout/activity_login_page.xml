@@ -10,7 +10,7 @@
         android:id="@+id/username_text"
         android:layout_width="258dp"
         android:layout_height="90dp"
-        android:text="Enter Username"
+        android:text="@string/enterUsername"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -18,11 +18,36 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.165" />
 
+    <EditText
+        android:id="@+id/username_input"
+        android:layout_width="207dp"
+        android:layout_height="41dp"
+        android:hint="@string/username_input_hint"
+        android:inputType="text|textNoSuggestions"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.205" />
+
     <TextView
         android:id="@+id/password_text"
-        android:layout_width="246dp"
-        android:layout_height="102dp"
-        android:text="Enter Password"
+        android:layout_width="258dp"
+        android:layout_height="90dp"
+        android:text="@string/enterPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.472" />
+
+    <EditText
+        android:id="@+id/postal_address"
+        android:layout_width="174dp"
+        android:layout_height="41dp"
+        android:hint="@string/password_hint"
+        android:inputType="textPassword|textNoSuggestions"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +57,7 @@
         android:id="@+id/create_account_button"
         android:layout_width="169dp"
         android:layout_height="58dp"
-        android:text="Create Account"
+        android:text="@string/createAccount"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -44,7 +69,7 @@
         android:id="@+id/login_button"
         android:layout_width="177dp"
         android:layout_height="65dp"
-        android:text="Login"
+        android:text="@string/loginButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
