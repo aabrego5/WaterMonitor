@@ -21,6 +21,7 @@
         <activity android:name=".TrackingPage" />
         <activity android:name=".HomePage" />
         <activity android:name=".LoginPage" />
+        <activity android:name=".ValveAdjustmentPage" />
         <activity android:name=".WelcomeScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

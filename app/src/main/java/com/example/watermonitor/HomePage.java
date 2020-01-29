@@ -19,6 +19,9 @@ import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.view.PieChartView;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.digi.xbee.api.android.XBeeBLEDevice;
@@ -29,6 +32,7 @@ public class HomePage extends AppCompatActivity {
     PieChartView pieChartView;
     List<SliceValue> pieData = new ArrayList<>();
     PieChartData pieChartData = new PieChartData(pieData);
+    Button valve_button;
 
     // Constants.
     // TODO: replace with the Bluetooth MAC address of your XBee device.
@@ -44,6 +48,23 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        valve_button = (Button) findViewById(R.id.adjust_valves_button);
+        valve_button.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent intent = new Intent(HomePage.this,ValveAdjustmentPage.class);
+                startActivity(intent);
+
+            }
+        });
+
+        // Create a welcome message using the entered username
+        Intent intent = getIntent();
+        String welcome_message = "Hello, " + intent.getStringExtra(LoginPage.USERNAME) + "!";
+        TextView textView = findViewById(R.id.greeting);
+        textView.setText(welcome_message);
+
         pieChartView = findViewById(R.id.chart);
 
         SliceValue bSink = new SliceValue(15,Color.BLUE);

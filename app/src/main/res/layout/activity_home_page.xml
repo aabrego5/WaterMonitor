@@ -8,21 +8,33 @@
     >
 
     <Button
-        android:id="@+id/about_button"
+        android:id="@+id/adjust_valves_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="About"
+        android:text="Adjust Valves"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.907"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="0.918" />
 
     <lecho.lib.hellocharts.view.PieChartView
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true" />
+        android:clickable="true"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/greeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
