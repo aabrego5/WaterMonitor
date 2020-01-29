@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import io.realm.Realm;
 import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.view.PieChartView;
@@ -71,6 +72,9 @@ public class HomePage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //Initializing realm db, only needs to be done nce
+        Realm.init(this);
 
         // Instantiate the XBeeDevice object and open the connection.
         // This process blocks the UI, so it must be done in a different thread.
