@@ -10,31 +10,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class ValveAdjustmentPage extends AppCompatActivity {
-    RecyclerView recycler;
-    LinearLayoutManager manager;
-    MyAdapter adapter;
-    String[] appliances;
+    private ArrayList<ValveStatus> valves;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_valve_adjustment);
-        setContentView(R.layout.activity_valve_adjustment_dummy);
+        setContentView(R.layout.activity_valve_adjustment);
 
-        /*appliances = new String[] {"Bathroom Sink", "Kitchen Sink", "Shower", "Toilet"};
-        recycler = (RecyclerView) findViewById(R.id.valve_page);
+        // Lookup the recyclerview in activity layout
+        RecyclerView valveAdjustment = (RecyclerView) findViewById(R.id.ValveAdjustment);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        // recycler.setHasFixedSize(true);
+        // create dummy list of valves
+        valves = new ArrayList<ValveStatus>();
+        valves.add(new ValveStatus("Sink"));
+        valves.add(new ValveStatus("Shower", 50));
+        valves.add(new ValveStatus("Toilet", 75));
 
-        // use a linear layout manager
-        manager = new LinearLayoutManager(this);
-        recycler.setLayoutManager(manager);
-
-        // specify an adapter
-        adapter = new MyAdapter(appliances);
-        recycler.setAdapter(adapter);*/
+        // Create adapter passing in the dummy data
+        MyAdapter adapter = new MyAdapter(valves);
+        // Attach the adapter to the recyclerview to populate items
+        valveAdjustment.setAdapter(adapter);
+        // Set layout manager to position the items
+        valveAdjustment.setLayoutManager(new LinearLayoutManager(this));
     }
 }
