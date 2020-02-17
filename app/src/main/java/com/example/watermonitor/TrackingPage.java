@@ -18,14 +18,14 @@ import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
-import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import lecho.lib.hellocharts.view.LineChartView;
-
 public class TrackingPage extends AppCompatActivity {
+    Button option1, option2, option3, home;
     LineChartView lineChartViewToday;
     LineChartView lineChartViewThisWeek;
     LineChartView lineChartViewThisMonth;
@@ -36,10 +36,10 @@ public class TrackingPage extends AppCompatActivity {
     int[] yAxisDataToday = {5, 2, 1, 3, 2, 6, 5, 4, 5, 1, 9, 1};
 
 
-    String[] axisDataThisWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+    String[] axisDataThisWeek = {"M", "Tu", "W", "Th", "F", "Sa", "Su"};
     int[] yAxisDataThisWeek = {50, 20, 15, 30, 40, 50, 40};
 
-    String[] axisDataThisMonth = {"Week1", "Week2", "Week3", "Week4"};
+    String[] axisDataThisMonth = {"W1", "W2", "W3", "W4"};
     int[] getyAxisDataThisMonth = {15, 10, 15, 20};
 
     String[] axisDataThisYear = {"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept",
@@ -62,11 +62,16 @@ public class TrackingPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking_page);
+        option1 = (Button) findViewById(R.id.option1);
+        option2 = (Button) findViewById(R.id.option2);
+        option3 = (Button) findViewById(R.id.option3);
+        home = (Button) findViewById(R.id.home);
         lineChartViewToday = findViewById(R.id.chartToday);
         lineChartViewThisWeek = findViewById(R.id.chartThisWeek);
         lineChartViewThisMonth = findViewById(R.id.chartThisMonth);
         lineChartViewThisYear = findViewById(R.id.chartThisYear);
         lineChartViewYears = findViewById(R.id.chartYears);
+
 
         //yAxisLimit needs to be appropriately adjusted
         display(axisDataToday, yAxisDataToday, lineChartViewToday, 10);
@@ -82,6 +87,37 @@ public class TrackingPage extends AppCompatActivity {
         tvProgressLabel = findViewById(R.id.textView);
         tvProgressLabel.setText("Valve Opening: " + progress);
 
+        option1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(TrackingPage.this,TrackingPage2.class);
+                startActivity(intent);
+            }
+        });
+
+        option2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(TrackingPage.this,TrackingPage3.class);
+                startActivity(intent);
+            }
+        });
+
+        option3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(TrackingPage.this,TrackingPage4.class);
+                startActivity(intent);
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(TrackingPage.this,HomePage.class);
+                startActivity(intent);
+            }
+        });
     }
     SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
 
@@ -109,7 +145,7 @@ public class TrackingPage extends AppCompatActivity {
 
 
         Line line = new Line(yAxisValues).setColor(Color.parseColor("#9C27B0"));
-
+        //line.setStrokeWidth()
         for (int i = 0; i < axisData.length; i++) {
             axisValues.add(i, new AxisValue(i).setLabel(axisData[i]));
         }
@@ -125,11 +161,13 @@ public class TrackingPage extends AppCompatActivity {
         data.setLines(lines);
 
         Axis axis = new Axis();
-        axis.setName("Years");
+        axis.setName("Time Period");
         axis.setValues(axisValues);
         axis.setTextSize(16);
         axis.setTextColor(Color.parseColor("#03A9F4"));
         data.setAxisXBottom(axis);
+
+
 
         Axis yAxis = new Axis();
         yAxis.setName("Gallons");
@@ -158,8 +196,8 @@ public class TrackingPage extends AppCompatActivity {
                     startActivity(i);
                 }
                 if(x1 > x2){
-                    Intent i = new Intent(this, TrackingPageSinkDay.class);
-                    startActivity(i);
+//                    Intent i = new Intent(this, TrackingPage2.class);
+//                    startActivity(i);
                 }
                 break;
         }

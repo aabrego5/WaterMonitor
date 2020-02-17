@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-
-
     package="com.example.watermonitor">
 
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        tools:replace="android:icon, android:label"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".TrackingPageSinkDay"></activity>
-        <activity android:name=".TrackingPageSinkWeek" />
-        <activity android:name=".TrackingPageSinkWeeks" />
-        <activity android:name=".TrackingPageSinkMonth" />
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon, android:label">
+        <activity android:name=".AboutPage"></activity>
+        <activity android:name=".TrackingPage4" />
+        <activity android:name=".TrackingPage3" />
+        <activity android:name=".TrackingPage2" />
         <activity android:name=".TrackingPage" />
         <activity android:name=".HomePage" />
         <activity android:name=".LoginPage" />
