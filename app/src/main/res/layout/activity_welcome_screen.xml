@@ -4,17 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WelcomeScreen"
-    android:background="@drawable/water_monitor_drop">
+    tools:context=".WelcomeScreen">
 
     <Button
         android:id="@+id/welcome_button"
-        android:layout_width="410dp"
-        android:layout_height="728dp"
-        android:background="@android:drawable/divider_horizontal_bright"
+        android:layout_width="159dp"
+        android:layout_height="67dp"
         android:text="Welcome"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.658" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="303dp"
+        android:layout_height="256dp"
+        android:contentDescription="App logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.262"
+        app:srcCompat="@drawable/water_monitor_drop" />
 </androidx.constraintlayout.widget.ConstraintLayout>
