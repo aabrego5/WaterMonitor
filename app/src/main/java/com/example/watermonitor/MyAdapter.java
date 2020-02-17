@@ -55,9 +55,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         // set the contents of the view with that element
         TextView textView = holder.valveName;
-        textView.setText(valve.GetApplianceName());
+        textView.setText(valve.getApplianceName());
         SeekBar seekBar = holder.valvePcntBar;
-        seekBar.setProgress(valve.GetValvePercentage());
+        seekBar.setProgress(valve.getValvePercentage());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -65,4 +65,5 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public int getItemCount() {
         return valves.size();
     }
+
 }
