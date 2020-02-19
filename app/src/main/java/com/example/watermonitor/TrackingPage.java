@@ -25,6 +25,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class TrackingPage extends AppCompatActivity {
+    TextView title, titleToday, titleThisWeek, titleThisMonth, titleThisYear, titleYears;
     Button option1, option2, option3, home;
     LineChartView lineChartViewToday;
     LineChartView lineChartViewThisWeek;
@@ -62,6 +63,28 @@ public class TrackingPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking_page);
+        title = (TextView) findViewById(R.id.title);
+        titleToday = (TextView) findViewById(R.id.titleToday);
+        titleThisWeek = (TextView) findViewById(R.id.titleThisWeek);
+        titleThisMonth = (TextView) findViewById(R.id.titleThisMonth);
+        titleThisYear = (TextView) findViewById(R.id.titleThisYear);
+        titleYears = (TextView) findViewById(R.id.titleYears);
+
+//        title.setBackgroundColor(Color.BLUE);
+//        titleToday.setBackgroundColor(Color.BLUE);
+//        titleThisWeek.setBackgroundColor(Color.BLUE);
+//        titleThisMonth.setBackgroundColor(Color.BLUE);
+//        titleThisYear.setBackgroundColor(Color.BLUE);
+//        titleYears.setBackgroundColor(Color.BLUE);
+
+        title.setTextColor(Color.BLACK);
+        titleToday.setTextColor(Color.BLUE);
+        titleThisWeek.setTextColor(Color.BLUE);
+        titleThisMonth.setTextColor(Color.BLUE);
+        titleThisYear.setTextColor(Color.BLUE);
+        titleYears.setTextColor(Color.BLUE);
+
+
         option1 = (Button) findViewById(R.id.option1);
         option2 = (Button) findViewById(R.id.option2);
         option3 = (Button) findViewById(R.id.option3);
@@ -144,7 +167,7 @@ public class TrackingPage extends AppCompatActivity {
         List axisValues = new ArrayList();
 
 
-        Line line = new Line(yAxisValues).setColor(Color.parseColor("#9C27B0"));
+        Line line = new Line(yAxisValues).setColor(Color.BLUE);
         //line.setStrokeWidth()
         for (int i = 0; i < axisData.length; i++) {
             axisValues.add(i, new AxisValue(i).setLabel(axisData[i]));
@@ -164,14 +187,15 @@ public class TrackingPage extends AppCompatActivity {
         axis.setName("Time Period");
         axis.setValues(axisValues);
         axis.setTextSize(16);
-        axis.setTextColor(Color.parseColor("#03A9F4"));
+        axis.setTextColor(Color.BLACK);
         data.setAxisXBottom(axis);
 
 
 
         Axis yAxis = new Axis();
         yAxis.setName("Gallons");
-        yAxis.setTextColor(Color.parseColor("#03A9F4"));
+        yAxis.setTextColor(Color.BLACK);
+        //yAxis.setTextColor(Color.parseColor("#03A9F4"));
         yAxis.setTextSize(16);
         data.setAxisYLeft(yAxis);
 

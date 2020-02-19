@@ -32,7 +32,7 @@ public class HomePage extends AppCompatActivity {
     PieChartView pieChartView;
     List<SliceValue> pieData = new ArrayList<>();
     PieChartData pieChartData = new PieChartData(pieData);
-    Button valve_button, about;
+    Button valve_button, about, realtime;
 
     // Constants.
     // TODO: replace with the Bluetooth MAC address of your XBee device.
@@ -64,6 +64,16 @@ public class HomePage extends AppCompatActivity {
 
             public void onClick(View v) {
                 Intent intent = new Intent(HomePage.this,AboutPage.class);
+                startActivity(intent);
+
+            }
+        });
+
+        realtime = (Button) findViewById(R.id.realtime);
+        about.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent intent = new Intent(HomePage.this,RealTime.class);
                 startActivity(intent);
 
             }

@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon, android:label">
-        <activity android:name=".AboutPage"></activity>
+        <activity android:name=".RealTime"></activity>
+        <activity android:name=".AboutPage" />
         <activity android:name=".TrackingPage4" />
         <activity android:name=".TrackingPage3" />
         <activity android:name=".TrackingPage2" />
@@ -26,6 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
