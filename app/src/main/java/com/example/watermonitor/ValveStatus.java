@@ -1,6 +1,10 @@
 package com.example.watermonitor;
 
-public class ValveStatus {
+import io.realm.RealmObject;
+import io.realm.annotations.Index;
+
+public class ValveStatus extends RealmObject{
+    @Index
     private String appliance;
     private int valveOpenPcnt; // can range from 0-100, 0 is closed and 100 is open
     private int newValveOpenPcnt;

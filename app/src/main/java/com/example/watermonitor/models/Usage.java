@@ -6,13 +6,13 @@ import io.realm.RealmObject;
 import io.realm.annotations.Index;
 
 public class Usage extends RealmObject {
-    private String location;
+    private String appliance;
     @Index
     private Date date;
     private float amount;
 
     public Usage(String location, Date date, float amount) {
-        this.location = location;
+        this.appliance = location;
         this.date = date;
         this.amount = amount;
     }
@@ -21,11 +21,11 @@ public class Usage extends RealmObject {
     }
 
     public String getLocation() {
-        return location;
+        return appliance;
     }
 
     public void setLocation(String location) {
-        this.location = location;
+        this.appliance = location;
     }
 
     public Date getDate() {
