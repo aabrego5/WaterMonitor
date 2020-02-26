@@ -49,6 +49,11 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        //Initializing realm db, only needs to be done Once
+        Realm.init(this);
+
+        //
+
         valve_button = (Button) findViewById(R.id.adjust_valves_button);
         valve_button.setOnClickListener(new View.OnClickListener() {
 
@@ -113,9 +118,6 @@ public class HomePage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        //Initializing realm db, only needs to be done nce
-        Realm.init(this);
 
         // Instantiate the XBeeDevice object and open the connection.
         // This process blocks the UI, so it must be done in a different thread.

@@ -3,9 +3,11 @@ package com.example.watermonitor.models;
 import java.util.Date;
 
 import io.realm.RealmObject;
+import io.realm.annotations.Index;
 
 public class Usage extends RealmObject {
     private String location;
+    @Index
     private Date date;
     private float amount;
 
