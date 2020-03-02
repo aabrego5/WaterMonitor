@@ -13,6 +13,7 @@
         android:background="#A9CCEB"
         android:gravity="center_horizontal"
         android:text="Valve Adjustment"
+        android:fontFamily="@font/cardo_bold"
         android:textSize="36sp" />
 
     <TextView
@@ -20,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Bathroom Sink:"
+        android:fontFamily="@font/cardo_bold"
         android:textSize="24sp" />
 
     <SeekBar
@@ -33,6 +35,7 @@
         android:layout_height="wrap_content"
         android:background="#A9CCEB"
         android:text="Kitchen Sink:"
+        android:fontFamily="@font/cardo_bold"
         android:textSize="24sp" />
 
     <SeekBar
@@ -46,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Shower:"
+        android:fontFamily="@font/cardo_bold"
         android:textSize="24sp" />
 
     <SeekBar
@@ -59,6 +63,7 @@
         android:layout_height="wrap_content"
         android:background="#A9CCEB"
         android:text="Toilet:"
+        android:fontFamily="@font/cardo_bold"
         android:textSize="24sp" />
 
     <SeekBar

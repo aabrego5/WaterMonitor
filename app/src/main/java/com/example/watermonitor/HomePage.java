@@ -24,15 +24,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.digi.xbee.api.android.XBeeBLEDevice;
-import com.digi.xbee.api.exceptions.BluetoothAuthenticationException;
-import com.digi.xbee.api.exceptions.XBeeException;
+import io.realm.RealmObject;
+import io.realm.annotations.Index;
 
 public class HomePage extends AppCompatActivity {
     PieChartView pieChartView;
     List<SliceValue> pieData = new ArrayList<>();
     PieChartData pieChartData = new PieChartData(pieData);
     Button valve_button, about, realtime;
+    Realm realm;
 
     // Constants.
     // TODO: replace with the Bluetooth MAC address of your XBee device.
@@ -49,10 +49,15 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        //Initializing realm db, only needs to be done Once
         Realm.init(this);
+        realm = Realm.getDefaultInstance(); // opens "myrealm.realm"
 
-        //
+        //Initializing realm db, only needs to be done Once
+
+
+        try {
+            // ... Do something ...
+
 
         valve_button = (Button) findViewById(R.id.adjust_valves_button);
         valve_button.setOnClickListener(new View.OnClickListener() {
@@ -85,24 +90,24 @@ public class HomePage extends AppCompatActivity {
         });
 
         // Create a welcome message using the entered username
-        Intent intent = getIntent();
-        String welcome_message = "Hello, " + intent.getStringExtra(LoginPage.USERNAME) + "!";
-        TextView textView = findViewById(R.id.greeting);
-        textView.setText(welcome_message);
+//        Intent intent = getIntent();
+//        String welcome_message = "Hello, " + intent.getStringExtra(LoginPage.USERNAME) + "!";
+//        TextView textView = findViewById(R.id.greeting);
+//        textView.setText(welcome_message);
 
         pieChartView = findViewById(R.id.chart);
 
         SliceValue bSink = new SliceValue(15,Color.BLUE);
-        bSink.setLabel("Bathroom Sink");
+        bSink.setLabel("Option1");
         pieData.add(bSink);
 
 
         //pieData.add(new SliceValue(15, Color.BLUE).setLabel("Bathroom Sink"));
 
 
-        pieData.add(new SliceValue(25, Color.GRAY).setLabel("Kitchen Sink"));
-        pieData.add(new SliceValue(10, Color.RED).setLabel("Shower"));
-        pieData.add(new SliceValue(60, Color.MAGENTA).setLabel("Toilet"));
+        pieData.add(new SliceValue(25, Color.GRAY).setLabel("Option2"));
+        pieData.add(new SliceValue(10, Color.RED).setLabel("Option3"));
+        pieData.add(new SliceValue(60, Color.MAGENTA).setLabel("Option4"));
         pieChartData.setHasLabels(true);
         pieChartData.setHasLabels(true).setValueLabelTextSize(14);
         pieChartView.setPieChartData(pieChartData);
@@ -119,32 +124,11 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        // Instantiate the XBeeDevice object and open the connection.
-        // This process blocks the UI, so it must be done in a different thread.
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                // Instantiate an XBee BLE device with the Bluetooth MAC and password.
-//                myXBeeDevice = new XBeeBLEDevice(HomePage.this, BLE_MAC_ADDR, BLE_PASSWORD);
-//                try {
-//                    // Open the connection with the device.
-//                    myXBeeDevice.open();
-//
-//                    showToastMessage("Device open: " + myXBeeDevice.toString());
-//                } catch (BluetoothAuthenticationException e) {
-//                    // Error authenticating the device, check password.
-//                    showToastMessage("Invalid password: " + e.getMessage());
-//                } catch (XBeeException e) {
-//                    // Error opening the connection with the device.
-//                    showToastMessage("Could not open device: " + e.getMessage());
-//                }
-//            }
-//        }).start();
-
+        } finally {
+            realm.close();
+        }
     }
-    public void onChartSingleTapped(MotionEvent me){
 
-    }
 
     /**
      * Displays the given message.

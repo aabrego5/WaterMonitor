@@ -1,46 +1,37 @@
 package com.example.watermonitor.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import io.realm.RealmObject;
 import io.realm.annotations.Index;
 
-public class Usage extends RealmObject {
-    private String appliance;
-    @Index
-    private Date date;
-    private float amount;
 
-    public Usage(String location, Date date, float amount) {
-        this.appliance = location;
-        this.date = date;
-        this.amount = amount;
+
+public class Usage extends RealmObject {
+    @Index
+
+    public String username; //V123
+    public String password;
+    public String user_name; //Vinisha Venugopal
+    //Appliance appliance;
+    ArrayList<String> appList; // = new ArrayList<Appliance>();
+
+
+    public Usage(String username, String password, String user_name) {
+        this.username = username;
+        this.password = password;
+        this.user_name = user_name;
     }
 
     public Usage() {
+
     }
 
-    public String getLocation() {
-        return appliance;
+    public void addApp(String location, Date date, float amount) {
+        Appliance app = new Appliance(location, date, amount);
+//        appList.add(app);
     }
 
-    public void setLocation(String location) {
-        this.appliance = location;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(float amount) {
-        this.amount = amount;
-    }
 }

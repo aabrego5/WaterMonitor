@@ -10,6 +10,8 @@ public class ValveStatus extends RealmObject{
     private int newValveOpenPcnt;
     private boolean isChanged;
 
+    public ValveStatus(){}
+
     public ValveStatus(String app, int pcnt) {
         appliance = app;
         isChanged = false;
