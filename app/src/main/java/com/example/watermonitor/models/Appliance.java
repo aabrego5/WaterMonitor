@@ -11,11 +11,11 @@ public class Appliance {
     public String username;
     public ValveStatus valve;
 
-    public Appliance(String location, Date date, float amount, String username, ValveStatus valve) {
+    public Appliance(String location, Date date, float amount, String username) {
+        this.username = username;
         this.appliance = location;
         this.date = date;
         this.amount = amount;
-        this.valve = valve;
     }
 }
 
