@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.view.PieChartView;
@@ -31,8 +32,8 @@ public class HomePage extends AppCompatActivity {
     PieChartView pieChartView;
     List<SliceValue> pieData = new ArrayList<>();
     PieChartData pieChartData = new PieChartData(pieData);
-    Button valve_button, about, realtime;
-    Realm realm;
+    Button valve_button, add_button, about, realtime;
+
     // Constants.
     // TODO: replace with the Bluetooth MAC address of your XBee device.
     //private static final String BLE_MAC_ADDR = "08:6B:D7:52:B3:7B";
@@ -48,13 +49,22 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        //Initializing realm db, only needs to be done Once
 
         valve_button = (Button) findViewById(R.id.adjust_valves_button);
         valve_button.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 Intent intent = new Intent(HomePage.this,ValveAdjustmentPage.class);
+                startActivity(intent);
+
+            }
+        });
+
+        add_button = (Button) findViewById(R.id.add_valve_button);
+        add_button.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent intent = new Intent(HomePage.this,AddValvePage.class);
                 startActivity(intent);
 
             }
@@ -80,14 +90,6 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        realm = null;
-
-        try{
-            realm = Realm.getDefaultInstance();
-
-        }finally{
-            if(realm != null) realm.close();
-        }
         //Create a welcome message using the entered username
         Intent intent = getIntent();
         String welcome_message = "Hello, " + LoginPage.check_name + "!";
@@ -122,8 +124,6 @@ public class HomePage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
 
