@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon, android:label">
-        <activity android:name=".RealTime"></activity>
+        <activity android:name=".CreateAccountPage"></activity>
+        <activity android:name=".RealTime" />
         <activity android:name=".AboutPage" />
         <activity android:name=".TrackingPage4" />
         <activity android:name=".TrackingPage3" />

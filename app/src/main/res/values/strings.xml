@@ -6,4 +6,7 @@
     <string name="createAccount">Create Account</string>
     <string name="username_input_hint">janedoe18</string>
     <string name="password_hint">password</string>
+    <string name="enterUsersName">Enter Your Full Name</string>
+    <string name="name_input_hint">Jane Doe</string>
+
 </resources>

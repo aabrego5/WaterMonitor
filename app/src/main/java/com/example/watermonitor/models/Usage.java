@@ -16,7 +16,7 @@ public class Usage extends RealmObject {
     public String password;
     public String user_name; //Vinisha Venugopal
     //Appliance appliance;
-    ArrayList<String> appList; // = new ArrayList<Appliance>();
+    //ArrayList<String> appList; // = new ArrayList<Appliance>();
 
 
     public Usage(String username, String password, String user_name) {
@@ -29,9 +29,6 @@ public class Usage extends RealmObject {
 
     }
 
-    public void addApp(String location, Date date, float amount) {
-        Appliance app = new Appliance(location, date, amount);
-//        appList.add(app);
-    }
+
 
 }

@@ -32,7 +32,6 @@ public class HomePage extends AppCompatActivity {
     List<SliceValue> pieData = new ArrayList<>();
     PieChartData pieChartData = new PieChartData(pieData);
     Button valve_button, about, realtime;
-    Realm realm;
 
     // Constants.
     // TODO: replace with the Bluetooth MAC address of your XBee device.
@@ -49,15 +48,7 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        Realm.init(this);
-        realm = Realm.getDefaultInstance(); // opens "myrealm.realm"
-
         //Initializing realm db, only needs to be done Once
-
-
-        try {
-            // ... Do something ...
-
 
         valve_button = (Button) findViewById(R.id.adjust_valves_button);
         valve_button.setOnClickListener(new View.OnClickListener() {
@@ -89,11 +80,11 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        // Create a welcome message using the entered username
-//        Intent intent = getIntent();
-//        String welcome_message = "Hello, " + intent.getStringExtra(LoginPage.USERNAME) + "!";
-//        TextView textView = findViewById(R.id.greeting);
-//        textView.setText(welcome_message);
+         //Create a welcome message using the entered username
+        Intent intent = getIntent();
+        String welcome_message = "Hello, " + intent.getStringExtra(LoginPage.check_username) + "!";
+        TextView textView = findViewById(R.id.greeting);
+        textView.setText(welcome_message);
 
         pieChartView = findViewById(R.id.chart);
 
@@ -124,9 +115,7 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        } finally {
-            realm.close();
-        }
+
     }
 
 
