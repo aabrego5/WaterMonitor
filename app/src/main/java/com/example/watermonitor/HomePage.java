@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.view.PieChartView;
@@ -31,7 +32,8 @@ public class HomePage extends AppCompatActivity {
     PieChartView pieChartView;
     List<SliceValue> pieData = new ArrayList<>();
     PieChartData pieChartData = new PieChartData(pieData);
-    Button valve_button, about, realtime;
+
+    Button valve_button, add_button, about, realtime;
 
     // Constants.
     // TODO: replace with the Bluetooth MAC address of your XBee device.
@@ -54,6 +56,16 @@ public class HomePage extends AppCompatActivity {
 
             public void onClick(View v) {
                 Intent intent = new Intent(HomePage.this,ValveAdjustmentPage.class);
+                startActivity(intent);
+
+            }
+        });
+
+        add_button = (Button) findViewById(R.id.add_valve_button);
+        add_button.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent intent = new Intent(HomePage.this,AddValvePage.class);
                 startActivity(intent);
 
             }
@@ -114,8 +126,6 @@ public class HomePage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
 

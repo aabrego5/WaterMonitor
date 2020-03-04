@@ -10,12 +10,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.watermonitor.models.Appliance;
+
 import java.util.ArrayList;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 public class ValveAdjustmentPage extends AppCompatActivity {
-    private ArrayList<ValveStatus> valves;
-    private RecyclerView valveAdjustment;
-    private MyAdapter adapter;
+    public static ArrayList<ValveStatus> valves;
+    public static RecyclerView valveAdjustment;
+    public static MyAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,24 +28,39 @@ public class ValveAdjustmentPage extends AppCompatActivity {
         setContentView(R.layout.activity_valve_adjustment);
 
         Button save_button = findViewById(R.id.save_button);
-        save_button.setOnClickListener(new View.OnClickListener() {
+        /*save_button.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+                MyAdapter ad = ValveAdjustmentPage.adapter;
                 for(int i = 0; i < valves.size(); i++) {
-                    ValveStatus valve = valves.get(i);
-                    RecyclerView.ViewHolder holder = valveAdjustment.findViewHolderForAdapterPosition(i);
+                    // access the valve data set and the recycler view from ValveAdjustmentPage
+                    ValveStatus valve = ValveAdjustmentPage.valves.get(i);
+                    MyAdapter.MyViewHolder holder = (MyAdapter.MyViewHolder)
+                            ValveAdjustmentPage.valveAdjustment.findViewHolderForAdapterPosition(i);
+
+                    // update the valve status and notify the adapter
+                    valve.setValvePercentage(holder.valvePcntBar.getProgress());
+                    if(valve.openPcntIsChanged())
+                        ad.notifyItemChanged(i);
                 }
             }
-        });
+        });*/
 
         // Lookup the recyclerview in activity layout
-        valveAdjustment = (RecyclerView) findViewById(R.id.ValveAdjustment);
+        valveAdjustment = findViewById(R.id.ValveAdjustment);
 
-        // create dummy list of valves
+        // access the database for the appliances
         valves = new ArrayList<ValveStatus>();
-        valves.add(new ValveStatus("Sink"));
-        valves.add(new ValveStatus("Shower", 50));
-        valves.add(new ValveStatus("Toilet", 75));
+        Realm realm = null;
+        try {
+            realm = Realm.getDefaultInstance();
+            RealmResults<Appliance> appliances = realm.where(Appliance.class).findAll();
+            for(Appliance app : appliances) {
+                valves.add(new ValveStatus(app.appliance, (int) app.amount));
+            }
+        } finally {
+            if(realm != null) realm.close();
+        }
 
         // Create adapter passing in the dummy data
         adapter = new MyAdapter(valves);

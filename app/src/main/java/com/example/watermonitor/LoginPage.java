@@ -24,11 +24,11 @@ public class LoginPage extends AppCompatActivity {
     private String check_username;
     private String check_password;
     public static String check_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
-
 
         login_button = (Button) findViewById(R.id.login_button);
         create_account_button = (Button) findViewById(R.id.create_account_button);
@@ -48,8 +48,6 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View v) {
                 realm = null;
                 try {
-
-
                     realm = Realm.getDefaultInstance();
                     // get the entered username and send it to the home page
 
@@ -72,7 +70,5 @@ public class LoginPage extends AppCompatActivity {
 
             }
         });
-
-
     }
 }

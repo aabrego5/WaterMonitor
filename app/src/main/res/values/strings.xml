@@ -1,12 +1,14 @@
 <resources>
     <string name="app_name">WaterMonitor</string>
     <string name="loginButton">Login</string>
+    <string name="addValve">Add Valve</string>
     <string name="enterUsername">Enter Username</string>
     <string name="enterPassword">Enter Password</string>
+    <string name="enterAppliance">Enter Appliance</string>
     <string name="createAccount">Create Account</string>
     <string name="username_input_hint">janedoe18</string>
     <string name="password_hint">password</string>
     <string name="enterUsersName">Enter Your Full Name</string>
     <string name="name_input_hint">Jane Doe</string>
-
+    <string name="appliance_input_hint">Sink</string>
 </resources>

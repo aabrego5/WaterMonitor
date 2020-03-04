@@ -4,7 +4,9 @@ import com.example.watermonitor.ValveStatus;
 
 import java.util.Date;
 
-public class Appliance {
+import io.realm.RealmObject;
+
+public class Appliance extends RealmObject {
     public String appliance;
     public Date date;
     public float amount;
@@ -17,5 +19,7 @@ public class Appliance {
         this.date = date;
         this.amount = amount;
     }
+
+    public Appliance() {}
 }
 
