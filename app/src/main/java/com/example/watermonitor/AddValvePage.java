@@ -41,7 +41,7 @@ public class AddValvePage extends AppCompatActivity {
                         @Override
                         public void execute(Realm realm) {
                             realm.insertOrUpdate(app);
-
+                            applianceName.getText().clear();
                         }
                     });
                 } finally {
@@ -75,6 +75,7 @@ public class AddValvePage extends AppCompatActivity {
                             //if(!results.isEmpty()){
                             RealmResults<Appliance> results = realm.where(Appliance.class).equalTo("username", LoginPage.check_username).equalTo("appliance", appliance).findAll();
                             results.deleteAllFromRealm();
+                            applianceName.getText().clear();
                         }
                     });
                 } finally {

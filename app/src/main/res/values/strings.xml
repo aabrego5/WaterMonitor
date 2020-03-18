@@ -10,5 +10,5 @@
     <string name="password_hint">password</string>
     <string name="enterUsersName">Enter Your Full Name</string>
     <string name="name_input_hint">Jane Doe</string>
-    <string name="appliance_input_hint">Sink</string>
+    <string name="appliance_input_hint">ex: sink</string>
 </resources>
