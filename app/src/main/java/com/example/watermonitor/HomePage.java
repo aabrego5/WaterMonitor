@@ -111,12 +111,6 @@ public class HomePage extends AppCompatActivity {
 
         realm = null;
 
-//        public String appliance;
-//        public Date date;
-//        public float amount;
-//        public String username;
-//          public ValveStatus valve;
-
         pieChartView = findViewById(R.id.chart);
 
         try {
