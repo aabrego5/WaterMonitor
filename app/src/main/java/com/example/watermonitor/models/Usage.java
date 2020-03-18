@@ -16,7 +16,7 @@ public class Usage extends RealmObject {
     public String password;
     public String user_name; //Vinisha Venugopal
     //Appliance appliance;
-    //ArrayList<String> appList; // = new ArrayList<Appliance>();
+    //ArrayList<Appliance> appList; // = new ArrayList<Appliance>();
 
 
     public Usage(String username, String password, String user_name) {

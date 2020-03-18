@@ -10,11 +10,13 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.view.PieChartView;
@@ -25,6 +27,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.watermonitor.models.Appliance;
+import com.example.watermonitor.models.Usage;
+
 import io.realm.RealmObject;
 import io.realm.annotations.Index;
 
@@ -32,8 +37,10 @@ public class HomePage extends AppCompatActivity {
     PieChartView pieChartView;
     List<SliceValue> pieData = new ArrayList<>();
     PieChartData pieChartData = new PieChartData(pieData);
-
+    Realm realm;
     Button valve_button, add_button, about, realtime;
+    Usage user;
+    Appliance appl;
 
     // Constants.
     // TODO: replace with the Bluetooth MAC address of your XBee device.
@@ -47,8 +54,12 @@ public class HomePage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+//        finish();
+//        startActivity(getIntent());
 
 
         valve_button = (Button) findViewById(R.id.adjust_valves_button);
@@ -98,19 +109,53 @@ public class HomePage extends AppCompatActivity {
         TextView textView = findViewById(R.id.greeting);
         textView.setText(welcome_message);
 
+        realm = null;
+
+//        public String appliance;
+//        public Date date;
+//        public float amount;
+//        public String username;
+//          public ValveStatus valve;
+
         pieChartView = findViewById(R.id.chart);
 
-        SliceValue bSink = new SliceValue(15,Color.BLUE);
-        bSink.setLabel("Option1");
-        pieData.add(bSink);
+        try {
+            realm = Realm.getDefaultInstance();
+            //RealmResults<Usage> results = realm.where(Usage.class).contains("username",LoginPage.check_username).findAll();
+            final RealmResults<Appliance> results_app = realm.where(Appliance.class).contains("username", LoginPage.check_username).findAll();
+
+            final int[] arr_colors = {Color.BLUE, Color.YELLOW, Color.GREEN, Color.CYAN};
+            if (!results_app.isEmpty()) {
+
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+
+                        for(int i = 0; i < results_app.size(); i++){
+                            pieData.add(new SliceValue(25, arr_colors[i]).setLabel(results_app.get(i).appliance));
+                        }
+                    }
+                });
+
+                //Intent intent = new Intent(CreateAccountPage.this, LoginPage.class);
+                //startActivity(intent);
+            }
+        }finally{
+            if(realm != null) realm.close();
+        }
+       // pieChartView = findViewById(R.id.chart);
+
+        //SliceValue bSink = new SliceValue(15,Color.BLUE);
+        //bSink.setLabel("Option1");
+        //pieData.add(bSink);
 
 
         //pieData.add(new SliceValue(15, Color.BLUE).setLabel("Bathroom Sink"));
 
 
-        pieData.add(new SliceValue(25, Color.GRAY).setLabel("Option2"));
-        pieData.add(new SliceValue(10, Color.RED).setLabel("Option3"));
-        pieData.add(new SliceValue(60, Color.MAGENTA).setLabel("Option4"));
+//        pieData.add(new SliceValue(25, Color.GRAY).setLabel("Option2"));
+//        pieData.add(new SliceValue(10, Color.RED).setLabel("Option3"));
+//        pieData.add(new SliceValue(60, Color.MAGENTA).setLabel("Option4"));
         pieChartData.setHasLabels(true);
         pieChartData.setHasLabels(true).setValueLabelTextSize(14);
         pieChartView.setPieChartData(pieChartData);

@@ -21,21 +21,18 @@
 
             <Button
                 android:id="@+id/option1"
-                android:text="Option2"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 />
             <Button
                 android:id="@+id/option2"
-                android:text="Option3"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 />
             <Button
                 android:id="@+id/option3"
-                android:text="Option4"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -57,7 +54,6 @@
                 android:layout_height="35dp"
                 android:fontFamily="@font/cardo_bold"
                 android:gravity="center"
-                android:text="Option1"
                 android:textColor="#2196F3"
                 android:textSize="28sp"
                 android:textStyle="normal|bold"

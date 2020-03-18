@@ -10,11 +10,14 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
@@ -24,7 +27,10 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.watermonitor.models.Appliance;
+
 public class TrackingPage extends AppCompatActivity {
+    Realm realm;
     TextView title, titleToday, titleThisWeek, titleThisMonth, titleThisYear, titleYears;
     Button option1, option2, option3, home;
     LineChartView lineChartViewToday;
@@ -89,6 +95,48 @@ public class TrackingPage extends AppCompatActivity {
         option2 = (Button) findViewById(R.id.option2);
         option3 = (Button) findViewById(R.id.option3);
         home = (Button) findViewById(R.id.home);
+
+        title.setText("Appliance 1");
+        option1.setText("Appliance 2");
+        option2.setText("Appliance 3");
+        option3.setText("Appliance 4");
+
+
+
+        realm = null;
+        try{
+            realm = Realm.getDefaultInstance();
+            final RealmResults<Appliance> results_app = realm.where(Appliance.class).contains("username", LoginPage.check_username).findAll();
+            if (!results_app.isEmpty()) {
+
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+
+
+                        for(int i = 0; i < results_app.size(); i++){
+                            if(i == 0){
+                                title.setText(results_app.get(i).appliance);
+                            }else if(i == 1){
+                                option1.setText(results_app.get(i).appliance);
+                            }else if(i == 2){
+                                option2.setText(results_app.get(i).appliance);
+                            }else if(i == 3){
+                                option3.setText(results_app.get(i).appliance);
+                            }
+                        }
+                    }
+                });
+
+                //Intent intent = new Intent(CreateAccountPage.this, LoginPage.class);
+                //startActivity(intent);
+            }
+
+        }finally{
+            if(realm != null) realm.close();
+        }
+
+
         lineChartViewToday = findViewById(R.id.chartToday);
         lineChartViewThisWeek = findViewById(R.id.chartThisWeek);
         lineChartViewThisMonth = findViewById(R.id.chartThisMonth);

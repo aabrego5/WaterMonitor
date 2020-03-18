@@ -21,8 +21,8 @@ public class LoginPage extends AppCompatActivity {
     EditText password_text;
     Realm realm;
     Usage user;
-    private String check_username;
-    private String check_password;
+    public static String check_username;
+    public static String check_password;
     public static String check_name;
 
     @Override
