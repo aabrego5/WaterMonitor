@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,12 +28,14 @@ public class AddValvePage extends AppCompatActivity {
         addValve = (Button) findViewById(R.id.final_add_valve_button);
         home = (Button) findViewById(R.id.home);
         delete = (Button) findViewById(R.id.delete);
+
+
         final EditText applianceName = (EditText) findViewById(R.id.appliance_input);
 
         addValve.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String appliance = applianceName.getText().toString();
-                final Appliance app = new Appliance(appliance, new Date(), 100, LoginPage.check_username);
+                final Appliance app = new Appliance(appliance, new Date(), 100, LoginPage.check_username, false);
 
                 realm = null;
                 try {

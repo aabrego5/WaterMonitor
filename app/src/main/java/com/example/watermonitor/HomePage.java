@@ -111,6 +111,8 @@ public class HomePage extends AppCompatActivity {
 
         realm = null;
 
+
+
         pieChartView = findViewById(R.id.chart);
 
         try {
