@@ -1,0 +1,120 @@
+// These arguments were used when this file was generated. They will be automatically applied on subsequent loads 
+// via the GUI or CLI invocations. Run CLI with '--help' for additional information on how to override these arguments.
+// @cliArgs --board "/ti/boards/CC3235SF_LAUNCHXL" --product "simplelink_cc32xx_sdk@3.40.00.05"
+// @versions {"data":"2019103101","timestamp":"2019103101","tool":"1.3.1030","templates":"2019103101"}
+
+var RTOS = scripting.addModule("/ti/drivers/RTOS");
+var Display = scripting.addModule("/ti/display/Display");
+var Display1 = Display.addInstance();
+var LED = scripting.addModule("/ti/drivers/apps/LED");
+var LED1 = LED.addInstance();
+var GPIO = scripting.addModule("/ti/drivers/GPIO", {}, false);
+var LED2 = LED.addInstance();
+var LED3 = LED.addInstance();
+var Button = scripting.addModule("/ti/drivers/apps/Button");
+var Button1 = Button.addInstance();
+var Button2 = Button.addInstance();
+var GPIO1 = GPIO.addInstance();
+var GPIO2 = GPIO.addInstance();
+var GPIO7 = GPIO.addInstance();
+var Timer = scripting.addModule("/ti/drivers/Timer", {}, false);
+var Timer1 = Timer.addInstance();
+// Name - The C/C++ identifier used in applications as the index parameter passed to Display runtime APIs
+Display1.$name = "CONFIG_Display_0";
+// Use Hardware - Select the hardware to use, or 'None' to use available header pins
+Display1.$hardware = system.deviceData.board.components.XDS110UART;
+var Board = scripting.addModule("/ti/drivers/Board", {}, false);
+var DriverLib = scripting.addModule("/ti/devices/DriverLib", {}, false);
+// Name - The C/C++ identifier used in applications as the index parameter passed to UART runtime APIs
+Display1.uart.$name = "CONFIG_UART_0";
+var Power = scripting.addModule("/ti/drivers/Power", {}, false);
+// Name
+Power.parkPins.$name = "ti_drivers_power_PowerCC32XXPins0";
+// Name
+Display1.uart.uart.$name = "MyUART1";
+// Name - The C/C++ identifier used in applications as the index parameter passed to LED runtime APIs
+LED1.$name = "CONFIG_LED_0";
+// Use Hardware - Select the hardware to use, or 'None' to use available header pins
+LED1.$hardware = system.deviceData.board.components.LED_BLUE;
+// Mode - Select the GPIO mode
+LED1.gpioPin.mode = "Output";
+// Callback Function - The name of the callback function called when this GPIO pin triggers an interrupt, or 'NULL' if it's specified at runtime
+LED1.gpioPin.callbackFunction = "";
+// Name - The C/C++ identifier used in applications as the index parameter passed to LED runtime APIs
+LED2.$name = "CONFIG_LED_1";
+// Use Hardware - Select the hardware to use, or 'None' to use available header pins
+LED2.$hardware = system.deviceData.board.components.LED_GREEN;
+// Mode - Select the GPIO mode
+LED2.gpioPin.mode = "Output";
+// Callback Function - The name of the callback function called when this GPIO pin triggers an interrupt, or 'NULL' if it's specified at runtime
+LED2.gpioPin.callbackFunction = "";
+// Name - The C/C++ identifier used in applications as the index parameter passed to LED runtime APIs
+LED3.$name = "CONFIG_LED_2";
+// Use Hardware - Select the hardware to use, or 'None' to use available header pins
+LED3.$hardware = system.deviceData.board.components.LED_RED;
+// Dimmable - Determines whether control of brightness is required
+LED3.dimmable = true;
+// Name
+LED3.pwmPin.timer.$name = "MyTimer1";
+// Name - The C/C++ identifier used in applications as the index parameter passed to Button runtime APIs
+Button1.$name = "CONFIG_BUTTON_0";
+// Use Hardware - Select the hardware to use, or 'None' to use available header pins
+Button1.$hardware = system.deviceData.board.components.SW2;
+// Name - The C/C++ identifier used in applications as the index parameter passed to GPIO runtime APIs
+Button1.gpioPin.$name = "CONFIG_GPIO_0";
+// Interrupt Trigger - Specifies when or if interrupts are triggered
+Button1.gpioPin.interruptTrigger = "Rising Edge";
+// Name - The C/C++ identifier used in applications as the index parameter passed to Button runtime APIs
+Button2.$name = "CONFIG_BUTTON_1";
+// Use Hardware - Select the hardware to use, or 'None' to use available header pins
+Button2.$hardware = system.deviceData.board.components.SW3;
+// Name - The C/C++ identifier used in applications as the index parameter passed to GPIO runtime APIs
+Button2.gpioPin.$name = "CONFIG_GPIO_1";
+// Interrupt Trigger - Specifies when or if interrupts are triggered
+Button2.gpioPin.interruptTrigger = "Rising Edge";
+// Name - The C/C++ identifier used in applications as the index parameter passed to GPIO runtime APIs
+GPIO1.$name = "CONFIG_GPIO_OUT1";
+// Mode - Select the GPIO mode
+GPIO1.mode = "Output";
+// Pull - Specifies the internal pull-up or pull-down resistor configuration of this GPIO pin.
+GPIO1.pull = "Pull Down";
+// Name - The C/C++ identifier used in applications as the index parameter passed to GPIO runtime APIs
+GPIO2.$name = "CONFIG_GPIO_OUT2";
+// Mode - Select the GPIO mode
+GPIO2.mode = "Output";
+// Pull - Specifies the internal pull-up or pull-down resistor configuration of this GPIO pin.
+GPIO2.pull = "Pull Down";
+// Name - The C/C++ identifier used in applications as the index parameter passed to GPIO runtime APIs
+GPIO7.$name = "CONFIG_GPIO_IN";
+// Name - The C/C++ identifier used in applications as the index parameter passed to Timer runtime APIs
+Timer1.$name = "CONFIG_TIMER_0";
+// Timer Type
+Timer1.timerType = "32 Bits";
+// Name
+Timer1.timer.$name = "MyTimer1";
+// Suggest solution
+Display1.uart.uart.$suggestSolution = "UART1";
+// Suggest solution
+Display1.uart.uart.txPin.$suggestSolution = "55";
+// Suggest solution
+Display1.uart.uart.rxPin.$suggestSolution = "57";
+// Suggest solution
+LED1.gpioPin.gpioPin.$suggestSolution = "64";
+// Suggest solution
+LED2.gpioPin.gpioPin.$suggestSolution = "2";
+// Suggest solution
+LED3.pwmPin.timer.$suggestSolution = "Timer3";
+// Suggest solution
+LED3.pwmPin.timer.pwmPin.$suggestSolution = "1";
+// Suggest solution
+Button1.gpioPin.gpioPin.$suggestSolution = "4";
+// Suggest solution
+Button2.gpioPin.gpioPin.$suggestSolution = "15";
+// Suggest solution
+GPIO1.gpioPin.$suggestSolution = "3";
+// Suggest solution
+GPIO2.gpioPin.$suggestSolution = "5";
+// Suggest solution
+GPIO7.gpioPin.$suggestSolution = "6";
+// Suggest solution
+Timer1.timer.$suggestSolution = "Timer0";
