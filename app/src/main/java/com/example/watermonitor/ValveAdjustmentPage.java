@@ -11,6 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.watermonitor.models.Appliance;
 
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -28,6 +37,15 @@ public class ValveAdjustmentPage extends AppCompatActivity {
     SeekBar seekbar1, seekbar2, seekbar3, seekbar4;
     TextView valve1, valve2, valve3, valve4;
     float pval;
+
+    MqttAndroidClient mqttAndroidClient;
+    String clientId = "ExampleAndroidClient";
+    final String serverUri = "tcp:mqtt.eclipse.org:1883";
+    final String publishTopic1 = "/cc3200/ToggleLEDCmdL1";
+    final String publishTopic2 = "/cc3200/ToggleLEDCmdL2";
+    final String publishTopic3 = "/cc3200/ToggleLEDCmdL3";
+    final String publishMessage = "AHHHH";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +83,52 @@ public class ValveAdjustmentPage extends AppCompatActivity {
             }
         });
 
+        mqttAndroidClient = new MqttAndroidClient(getApplicationContext(), serverUri, clientId);
+        mqttAndroidClient.setCallback(new MqttCallbackExtended() {
+            @Override
+            public void connectComplete(boolean reconnect, String serverURI) {
+
+            }
+
+            @Override
+            public void connectionLost(Throwable cause) {
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+
+            }
+        });
+        MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
+        mqttConnectOptions.setAutomaticReconnect(true);
+        mqttConnectOptions.setCleanSession(false);
+        try {
+            //addToHistory("Connecting to " + serverUri);
+            mqttAndroidClient.connect(mqttConnectOptions, null, new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    DisconnectedBufferOptions disconnectedBufferOptions = new DisconnectedBufferOptions();
+                    disconnectedBufferOptions.setBufferEnabled(true);
+                    disconnectedBufferOptions.setBufferSize(100);
+                    disconnectedBufferOptions.setPersistBuffer(false);
+                    disconnectedBufferOptions.setDeleteOldestMessages(false);
+                    mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    System.out.println("Your shits not working bro");
+                }
+            });
+
+
+        } catch (MqttException ex){
+            ex.printStackTrace();
+        }
 
         realm = null;
         try{
@@ -167,8 +231,10 @@ public class ValveAdjustmentPage extends AppCompatActivity {
                         //tView.setText(pval + "/" + seekBar.getMax());
                         if (pval != appl.amount) {
                             appl.isChanged = true;
+                            publishMessage();
                         }
                         appl.amount = pval;
+
                         //final RealmResults<Appliance> results_app = realm.where(Appliance.class).contains("username", LoginPage.check_username).findAll();
                         realm.executeTransaction(new Realm.Transaction() {
                             @Override
@@ -385,5 +451,18 @@ public class ValveAdjustmentPage extends AppCompatActivity {
         //valveAdjustment.setAdapter(adapter);
         // Set layout manager to position the items
         //valveAdjustment.setLayoutManager(new LinearLayoutManager(this));
+    }
+    public void publishMessage(){
+
+        try {
+            MqttMessage message = new MqttMessage();
+            message.setPayload(publishMessage.getBytes());
+            mqttAndroidClient.publish(publishTopic1, message);
+            mqttAndroidClient.publish(publishTopic2, message);
+            mqttAndroidClient.publish(publishTopic3, message);
+        } catch (MqttException e) {
+            System.err.println("Error Publishing: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
