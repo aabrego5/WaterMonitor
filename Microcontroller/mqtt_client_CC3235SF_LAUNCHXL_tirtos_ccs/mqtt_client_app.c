@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2016, Texas Instruments Incorporated
  * All rights reserved.
- *
+ * --------------------------------------------------------------------------------search !_! for important locations--------------------
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -55,10 +55,15 @@
 #include <mqueue.h>
 #include <time.h>
 #include <unistd.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdbool.h>
 
 /* TI-Driver includes                                                        */
 #include <ti/drivers/GPIO.h>
 #include <ti/drivers/SPI.h>
+#include <ti/drivers/apps/LED.h>
+#include <ti/drivers/Timer.h>
 
 /* Simplelink includes                                                       */
 #include <ti/drivers/net/wifi/simplelink.h>
@@ -179,6 +184,12 @@ int32_t Mqtt_IF_Connect();
 int32_t MqttServer_start();
 int32_t MqttClient_start();
 int32_t MQTT_SendMsgToQueue(struct msgQueue *queueElement);
+
+//sensor timer interrupt
+void timerCallback(Timer_Handle myHandle);
+
+uint16_t ticks;
+uint16_t ticksinsec;
 
 //****************************************************************************
 //                         EXTERNAL FUNTIONS
@@ -581,7 +592,7 @@ void * MqttClient(void *pvParameters)
         /*msg received by client from remote broker (on a topic      */
         /*subscribed by local client)                                */
         case MSG_RECV_BY_CLIENT:
-            tmpBuff = (char *) ((char *) queueElemRecv.msgPtr + 12);
+            tmpBuff = (char *) ((char *) queueElemRecv.msgPtr + 12); //!_!
             if(strncmp
                 (tmpBuff, SUBSCRIPTION_TOPIC1, queueElemRecv.topLen) == 0)
             {
@@ -1132,7 +1143,7 @@ int32_t DisplayAppBanner(char* appName,
     return(ret);
 }
 
-void mainThread(void * args)
+void mainThread(void * args) //!_!
 {
     uint32_t count = 0;
     pthread_t spawn_thread = (pthread_t) NULL;
@@ -1150,11 +1161,36 @@ void mainThread(void * args)
 
     GPIO_init();
     SPI_init();
+    LED_init();
+    Timer_init();
 
     /*Configure the UART                                                     */
     tUartHndl = InitTerm();
     /*remove uart receive from LPDS dependency                               */
     UART_control(tUartHndl, UART_CMD_RXDISABLE, NULL);
+
+    //make sure both start low
+    //GPIO_write(CONFIG_GPIO_OUT1, 0); //!_!
+    //GPIO_write(CONFIG_GPIO_OUT2, 0);
+
+    //sensor timer init
+    /*Timer_Params_init(&params);
+    params.period = 1000000; //in µs (1s)
+    params.periodUnits = Timer_PERIOD_US;
+    params.timerMode = Timer_CONTINUOUS_CALLBACK;
+    params.timerCallback = timerCallback;
+
+    timer0 = Timer_open(SENSOR_TIMER, &params);
+
+    if (timer0 == NULL) {
+        //Failed to initialized timer
+        while (1) {}
+    }
+
+    if (Timer_start(timer0) == Timer_STATUS_ERROR) {
+        //Failed to start timer
+        while (1) {}
+    }*/
 
     /*Create the sl_Task                                                     */
     pthread_attr_init(&pAttrs_spawn);
@@ -1215,6 +1251,11 @@ void mainThread(void * args)
 
     while(1)
     {
+        /*if(GPIO_read(CONFIG_GPIO_IN) == 1){ //need to fix so that does not stall connection
+            ticks++;
+            while(GPIO_read(CONFIG_GPIO_IN) == 1){} //mainly this line !_!
+        }*/
+
         gResetApplication = false;
         topic[0] = SUBSCRIPTION_TOPIC0;
         topic[1] = SUBSCRIPTION_TOPIC1;
@@ -1257,3 +1298,9 @@ void mainThread(void * args)
 //! @}
 //
 //*****************************************************************************
+
+void timerCallback(Timer_Handle myHandle)
+{
+    ticksinsec = ticks;
+    ticks = 0;
+}
