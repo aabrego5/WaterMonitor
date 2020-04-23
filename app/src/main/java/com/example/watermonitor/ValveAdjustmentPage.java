@@ -458,8 +458,8 @@ public class ValveAdjustmentPage extends AppCompatActivity {
             MqttMessage message = new MqttMessage();
             message.setPayload(publishMessage.getBytes());
             mqttAndroidClient.publish(publishTopic1, message);
-            mqttAndroidClient.publish(publishTopic2, message);
-            mqttAndroidClient.publish(publishTopic3, message);
+//            mqttAndroidClient.publish(publishTopic2, message);
+//            mqttAndroidClient.publish(publishTopic3, message);
         } catch (MqttException e) {
             System.err.println("Error Publishing: " + e.getMessage());
             e.printStackTrace();
