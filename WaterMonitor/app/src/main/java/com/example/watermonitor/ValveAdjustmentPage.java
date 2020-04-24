@@ -17,11 +17,13 @@ import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
+import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.w3c.dom.Text;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -36,11 +38,11 @@ public class ValveAdjustmentPage extends AppCompatActivity {
     Realm realm;
     SeekBar seekbar1, seekbar2, seekbar3, seekbar4;
     TextView valve1, valve2, valve3, valve4;
-    float pval;
+    int pval;
 
     MqttAndroidClient mqttAndroidClient;
-    String clientId = "ExampleAndroidClient";
-    final String serverUri = "tcp:mqtt.eclipse.org:1883";
+    String clientId = MqttClient.generateClientId();
+    final String serverUri = "tcp://mqtt.eclipse.org:1883";
     final String publishTopic1 = "/cc3200/ToggleLEDCmdL1";
     final String publishTopic2 = "/cc3200/ToggleLEDCmdL2";
     final String publishTopic3 = "/cc3200/ToggleLEDCmdL3";
@@ -231,7 +233,7 @@ public class ValveAdjustmentPage extends AppCompatActivity {
                         //tView.setText(pval + "/" + seekBar.getMax());
                         if (pval != appl.amount) {
                             appl.isChanged = true;
-                            publishMessage();
+                            publishMessage(pval);
                         }
                         appl.amount = pval;
 
@@ -452,11 +454,12 @@ public class ValveAdjustmentPage extends AppCompatActivity {
         // Set layout manager to position the items
         //valveAdjustment.setLayoutManager(new LinearLayoutManager(this));
     }
-    public void publishMessage(){
+    public void publishMessage(int value){
 
         try {
             MqttMessage message = new MqttMessage();
-            message.setPayload(publishMessage.getBytes());
+            byte[] bytes = ByteBuffer.allocate(4).putInt(value).array();
+            message.setPayload(bytes);
             mqttAndroidClient.publish(publishTopic1, message);
 //            mqttAndroidClient.publish(publishTopic2, message);
 //            mqttAndroidClient.publish(publishTopic3, message);
