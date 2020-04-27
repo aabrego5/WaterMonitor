@@ -15,6 +15,7 @@ import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -42,6 +43,7 @@ public class ValveAdjustmentPage extends AppCompatActivity {
 
     MqttAndroidClient mqttAndroidClient;
     String clientId = MqttClient.generateClientId();
+    final String subscriptionTopic = "/cc32xx/ButtonPressEvtSw2";
     final String serverUri = "tcp://mqtt.eclipse.org:1883";
     final String publishTopic1 = "/cc3200/ToggleLEDCmdL1";
     final String publishTopic2 = "/cc3200/ToggleLEDCmdL2";
@@ -89,7 +91,8 @@ public class ValveAdjustmentPage extends AppCompatActivity {
         mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override
             public void connectComplete(boolean reconnect, String serverURI) {
-
+                if(reconnect)
+                    subscribeToTopic();
             }
 
             @Override
@@ -98,6 +101,7 @@ public class ValveAdjustmentPage extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(message);
             }
 
             @Override
@@ -109,7 +113,7 @@ public class ValveAdjustmentPage extends AppCompatActivity {
         mqttConnectOptions.setAutomaticReconnect(true);
         mqttConnectOptions.setCleanSession(false);
         try {
-            //addToHistory("Connecting to " + serverUri);
+
             mqttAndroidClient.connect(mqttConnectOptions, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
@@ -119,6 +123,7 @@ public class ValveAdjustmentPage extends AppCompatActivity {
                     disconnectedBufferOptions.setPersistBuffer(false);
                     disconnectedBufferOptions.setDeleteOldestMessages(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
+                    subscribeToTopic();
                 }
 
                 @Override
@@ -453,6 +458,34 @@ public class ValveAdjustmentPage extends AppCompatActivity {
         //valveAdjustment.setAdapter(adapter);
         // Set layout manager to position the items
         //valveAdjustment.setLayoutManager(new LinearLayoutManager(this));
+    }
+    public void subscribeToTopic(){
+        try {
+            mqttAndroidClient.subscribe(subscriptionTopic, 0, null, new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    System.out.println("we've subscribed");
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    System.out.println("Couldn't subscribe brother");
+                }
+            });
+
+//            // THIS DOES NOT WORK!
+//            mqttAndroidClient.subscribe(subscriptionTopic, 0, new IMqttMessageListener() {
+//                @Override
+//                public void messageArrived(String topic, MqttMessage message) throws Exception {
+//                    // message Arrived!
+//                    System.out.println("Message: " + topic + " : " + new String(message.getPayload()));
+//                }
+//            });
+
+        } catch (MqttException ex){
+            System.err.println("Exception whilst subscribing");
+            ex.printStackTrace();
+        }
     }
     public void publishMessage(int value){
 
