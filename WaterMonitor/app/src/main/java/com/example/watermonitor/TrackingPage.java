@@ -109,8 +109,8 @@ public class TrackingPage extends AppCompatActivity {
             realm = Realm.getDefaultInstance();
             Appliance sink  = realm.where(Appliance.class).contains("username", LoginPage.check_username).contains("appliance","Sink").findFirst();
             //yAxisDataToday
-            for(int i = 0; i < sink.usageHistoryDay.get(0).size(); i++){
-                yAxisDataToday[i] = sink.usageHistoryDay.get(0).get(i);
+            for(int i = 0; i < sink.usageHistoryDay.size(); i++){
+                yAxisDataToday[i] = sink.usageHistoryDay.get(i);
             }
 //            for(int i = sink.usageHistoryDay.get(0).size(); i < 12; i++){
 //                yAxisDataToday[i] = 0;
