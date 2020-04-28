@@ -7,26 +7,40 @@
     tools:context=".AboutPage">
 
     <TextView
-        android:id="@+id/aboutTitle "
-        android:layout_width="251dp"
-        android:layout_height="84dp"
-        android:text="What does it do?"
+        android:id="@+id/aboutTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Water Moniter"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintVertical_bias="0.069" />
 
     <TextView
         android:id="@+id/aboutText"
-        android:layout_width="287dp"
-        android:layout_height="75dp"
-        android:text="Use the app to adjust water flow in your household. Converse water. Save the planet. "
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="Use the app to adjust water flow in various appliances in your household, then track your water usage over the last day, month, or even year. Conserve water. Save the planet."
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutTitle"
+        app:layout_constraintVertical_bias="0.121" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Developed by:\nZachary Miller\nAlexis Abrego\nLauren Jones\nNelson Levy\nVinisha Venugopal\nJohn Anderson"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.214" />
+        app:layout_constraintVertical_bias="0.729" />
 </androidx.constraintlayout.widget.ConstraintLayout>
