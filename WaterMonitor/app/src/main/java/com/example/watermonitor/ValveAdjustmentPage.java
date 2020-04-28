@@ -26,9 +26,11 @@ import org.w3c.dom.Text;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmResults;
 
 public class ValveAdjustmentPage extends AppCompatActivity {
@@ -112,13 +114,15 @@ public class ValveAdjustmentPage extends AppCompatActivity {
                         realm = Realm.getDefaultInstance();
                         realm.beginTransaction();
                         Appliance app = realm.where(Appliance.class).contains("username", LoginPage.check_username).contains("appliance", "Sink").findFirst();
-                        long diff = (date.getTime() - app.lastUpdate.getTime()) / 1000;
-                        if (diff >= 3600) {
-                            app.usageHistoryDay.add(0, 0);
-                            app.lastUpdate = date;
+                        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+                        if (hour == 0 && app.currentHour != hour) {
+                            for(int i = 0; i < 12; i++) {
+                                app.usageHistoryDay.set(i, 0);
+                            }
                         }
-                        int newVal = app.usageHistoryDay.first() + val/6;
-                        app.usageHistoryDay.set(0, newVal);
+                        app.currentHour = hour;
+                        int newVal = app.usageHistoryDay.get(hour/2) + val/6;
+                        app.usageHistoryDay.set(hour/2, newVal);
                         realm.commitTransaction();
                         System.out.println("Appliance values updated.");
                     } finally {
