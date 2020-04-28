@@ -40,7 +40,7 @@ public class TrackingPage extends AppCompatActivity {
 //    LineChartView lineChartViewYears;
     String[] axisDataToday = {"12am", "2am", "4am", "6am", "8am", "10am", "12pm", "2pm", "4pm",
             "6pm", "8pm", "10pm"};
-    int[] yAxisDataToday;
+    int[] yAxisDataToday = new int[12];
 
 
 
@@ -109,7 +109,7 @@ public class TrackingPage extends AppCompatActivity {
             realm = Realm.getDefaultInstance();
             Appliance sink  = realm.where(Appliance.class).contains("username", LoginPage.check_username).contains("appliance","Sink").findFirst();
             //yAxisDataToday
-            for(int i = 0; i < sink.usageHistoryDay.size(); i++){
+            for(int i = 0; i < 12; i++){
                 yAxisDataToday[i] = sink.usageHistoryDay.get(i);
             }
 //            for(int i = sink.usageHistoryDay.get(0).size(); i < 12; i++){
@@ -250,7 +250,7 @@ public class TrackingPage extends AppCompatActivity {
 
 
         Axis yAxis = new Axis();
-        yAxis.setName("Gallons");
+        yAxis.setName("Liters");
         yAxis.setTextColor(Color.BLACK);
         //yAxis.setTextColor(Color.parseColor("#03A9F4"));
         yAxis.setTextSize(16);
