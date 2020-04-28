@@ -30,7 +30,7 @@ import android.widget.TextView;
 import com.example.watermonitor.models.Appliance;
 
 public class TrackingPage extends AppCompatActivity {
-    Realm realm;
+    Realm realm = null;
     TextView title, titleToday, titleThisWeek, titleThisMonth, titleThisYear, titleYears;
     Button option1, option2, option3, home;
     LineChartView lineChartViewToday;
@@ -38,10 +38,9 @@ public class TrackingPage extends AppCompatActivity {
 //    LineChartView lineChartViewThisMonth;
 //    LineChartView lineChartViewThisYear;
 //    LineChartView lineChartViewYears;
-    String[] axisDataToday = {"12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm",
-            "9pm", "10pm", "11pm"};
-    int[] yAxisDataToday = {5, 2, 1, 3, 2, 6, 5, 4, 5, 1, 9, 1};
-
+    String[] axisDataToday = {"12am", "2am", "4am", "6am", "8am", "10am", "12pm", "2pm", "4pm",
+            "6pm", "8pm", "10pm"};
+    int[] yAxisDataToday;
 
 
 
@@ -108,13 +107,21 @@ public class TrackingPage extends AppCompatActivity {
         realm = null;
         try{
             realm = Realm.getDefaultInstance();
+            Appliance sink  = realm.where(Appliance.class).contains("username", LoginPage.check_username).contains("appliance","Sink").findFirst();
+            //yAxisDataToday
+            for(int i = 0; i < sink.usageHistoryDay.get(0).size(); i++){
+                yAxisDataToday[i] = sink.usageHistoryDay.get(0).get(i);
+            }
+            for(int i = sink.usageHistoryDay.get(0).size(); i < 12; i++){
+                yAxisDataToday[i] = 0;
+            }
+
             final RealmResults<Appliance> results_app = realm.where(Appliance.class).contains("username", LoginPage.check_username).findAll();
             if (!results_app.isEmpty()) {
 
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-
 
                         for(int i = 0; i < results_app.size(); i++){
                             if(i == 0){
@@ -130,8 +137,8 @@ public class TrackingPage extends AppCompatActivity {
                     }
                 });
 
-                //Intent intent = new Intent(CreateAccountPage.this, LoginPage.class);
-                //startActivity(intent);
+
+
             }
 
         }finally{
@@ -153,12 +160,12 @@ public class TrackingPage extends AppCompatActivity {
 //        display(axisDataThisYear, yAxisDataThisYear, lineChartViewThisYear, 100);
 //        display(axisDataYears, yAxisDataYears, lineChartViewYears, 300);
 
-        SeekBar seekBar = findViewById(R.id.seekBar);
-        seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
+//        SeekBar seekBar = findViewById(R.id.seekBar);
+//        seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
 
-        int progress = seekBar.getProgress();
-        tvProgressLabel = findViewById(R.id.textView);
-        tvProgressLabel.setText("Valve Opening: " + progress);
+//        int progress = seekBar.getProgress();
+//        tvProgressLabel = findViewById(R.id.textView);
+//        tvProgressLabel.setText("Valve Opening: " + progress);
 
         option1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,24 +199,24 @@ public class TrackingPage extends AppCompatActivity {
             }
         });
     }
-    SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
-
-        @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            // updated continuously as the user slides the thumb
-            tvProgressLabel.setText("Valve Opening: " + progress);
-        }
-
-        @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
-            // called when the user first touches the SeekBar
-        }
-
-        @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-            // called after the user finishes moving the SeekBar
-        }
-    };
+//    SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
+//
+//        @Override
+//        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//            // updated continuously as the user slides the thumb
+//            tvProgressLabel.setText("Valve Opening: " + progress);
+//        }
+//
+//        @Override
+//        public void onStartTrackingTouch(SeekBar seekBar) {
+//            // called when the user first touches the SeekBar
+//        }
+//
+//        @Override
+//        public void onStopTrackingTouch(SeekBar seekBar) {
+//            // called after the user finishes moving the SeekBar
+//        }
+//    };
 
 
     public void display(String[] axisData, int[] yAxisData, LineChartView lineChartView, int yAxisLimit){

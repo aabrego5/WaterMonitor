@@ -164,11 +164,11 @@ public class ValveAdjustmentPage extends AppCompatActivity {
         realm = null;
         try{
             realm = Realm.getDefaultInstance();
-            final RealmResults<Appliance> results_app = realm.where(Appliance.class).contains("username", LoginPage.check_username).findAll();
-            if (!results_app.isEmpty()) {
-                realm.executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
+                        final RealmResults<Appliance> results_app = realm.where(Appliance.class).contains("username", LoginPage.check_username).findAll();
+                        if (!results_app.isEmpty()) {
+                            realm.executeTransaction(new Realm.Transaction() {
+                                @Override
+                                public void execute(Realm realm) {
                         for(int i = 0; i < results_app.size(); i++){
                             if(i == 0){
                                 seekbar1.setProgress((int)results_app.get(i).amount);
