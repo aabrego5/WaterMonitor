@@ -41,6 +41,7 @@ public class TrackingPage extends AppCompatActivity {
     String[] axisDataToday = {"12am", "2am", "4am", "6am", "8am", "10am", "12pm", "2pm", "4pm",
             "6pm", "8pm", "10pm"};
     int[] yAxisDataToday = new int[12];
+    int yLimit;
 
 
 
@@ -109,8 +110,11 @@ public class TrackingPage extends AppCompatActivity {
             realm = Realm.getDefaultInstance();
             Appliance sink  = realm.where(Appliance.class).contains("username", LoginPage.check_username).contains("appliance","Sink").findFirst();
             //yAxisDataToday
+            yLimit = 0;
             for(int i = 0; i < 12; i++){
                 yAxisDataToday[i] = sink.usageHistoryDay.get(i);
+                if(sink.usageHistoryDay.get(i) > yLimit)
+                    yLimit = sink.usageHistoryDay.get(i);
             }
 //            for(int i = sink.usageHistoryDay.get(0).size(); i < 12; i++){
 //                yAxisDataToday[i] = 0;
@@ -154,7 +158,7 @@ public class TrackingPage extends AppCompatActivity {
 
 
         //yAxisLimit needs to be appropriately adjusted
-        display(axisDataToday, yAxisDataToday, lineChartViewToday, 10);
+        display(axisDataToday, yAxisDataToday, lineChartViewToday, yLimit);
 //        display(axisDataThisWeek, yAxisDataThisWeek, lineChartViewThisWeek, 60);
 //        display(axisDataThisMonth, getyAxisDataThisMonth, lineChartViewThisMonth, 40);
 //        display(axisDataThisYear, yAxisDataThisYear, lineChartViewThisYear, 100);
