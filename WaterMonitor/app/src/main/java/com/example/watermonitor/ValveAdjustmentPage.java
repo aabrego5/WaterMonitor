@@ -42,7 +42,7 @@ public class ValveAdjustmentPage extends AppCompatActivity {
     int pval;
 
     MqttAndroidClient mqttAndroidClient;
-    String clientId = MqttClient.generateClientId();
+    String clientId = "WaterMonitor";
     final String subscriptionTopic = "/cc32xx/ButtonPressEvtSw2";
     final String serverUri = "tcp://mqtt.eclipse.org:1883";
     final String publishTopic1 = "/cc3200/ToggleLEDCmdL1";
@@ -92,7 +92,9 @@ public class ValveAdjustmentPage extends AppCompatActivity {
             @Override
             public void connectComplete(boolean reconnect, String serverURI) {
                 if(reconnect)
-                    subscribeToTopic();
+                    System.out.println("welcome back boys");
+                else
+                subscribeToTopic();
             }
 
             @Override
@@ -101,7 +103,11 @@ public class ValveAdjustmentPage extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
-                System.out.println(message);
+                String msg = new String(message.getPayload());
+                int val = (int) msg.toCharArray()[0];
+                System.out.println(msg);
+                System.out.println(val);
+//                Appliance appliance = new Appliance("Sink", new Date(), val, );
             }
 
             @Override
@@ -111,7 +117,7 @@ public class ValveAdjustmentPage extends AppCompatActivity {
         });
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
-        mqttConnectOptions.setCleanSession(false);
+        mqttConnectOptions.setCleanSession(true);
         try {
 
             mqttAndroidClient.connect(mqttConnectOptions, null, new IMqttActionListener() {
@@ -123,7 +129,7 @@ public class ValveAdjustmentPage extends AppCompatActivity {
                     disconnectedBufferOptions.setPersistBuffer(false);
                     disconnectedBufferOptions.setDeleteOldestMessages(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
-                    subscribeToTopic();
+//                    subscribeToTopic();
                 }
 
                 @Override
