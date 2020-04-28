@@ -107,7 +107,8 @@ public class ValveAdjustmentPage extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 String msg = new String(message.getPayload());
                 int val = (int) msg.toCharArray()[0];
-                if(val != 0) {
+                System.out.println(val);
+                if(val != 0 && val < 20) {
                     Date date = new Date();
                     realm = null;
                     try {
