@@ -105,9 +105,27 @@ public class ValveAdjustmentPage extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 String msg = new String(message.getPayload());
                 int val = (int) msg.toCharArray()[0];
-                System.out.println(msg);
-                System.out.println(val);
-//                Appliance appliance = new Appliance("Sink", new Date(), val, );
+                if(val != 0) {
+                    Date date = new Date();
+                    realm = null;
+                    try {
+                        realm = Realm.getDefaultInstance();
+                        realm.beginTransaction();
+                        Appliance app = realm.where(Appliance.class).contains("username", LoginPage.check_username).contains("appliance", "Sink").findFirst();
+                        long diff = (date.getTime() - app.lastUpdate.getTime()) / 1000;
+                        if (diff >= 86400) {
+                            app.usageHistoryDay.add(0, 0);
+                            app.lastUpdate = date;
+                        }
+                        int newVal = app.usageHistoryDay.first() + val/6;
+                        app.usageHistoryDay.set(0, newVal);
+                        realm.commitTransaction();
+                        System.out.println("Appliance values updated.");
+                    } finally {
+                        if (realm != null) realm.close();
+                    }
+                }
+
             }
 
             @Override

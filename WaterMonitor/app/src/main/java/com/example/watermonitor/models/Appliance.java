@@ -6,6 +6,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 
 public class Appliance extends RealmObject {
@@ -23,6 +24,8 @@ public class Appliance extends RealmObject {
 //    public ArrayList<Integer> app_data_per_month = new ArrayList<Integer>();
 //    public ArrayList<Integer> app_data_per_week = new ArrayList<Integer>();
 //    public ArrayList<Integer> app_data_per_day = new ArrayList<Integer>();
+    public RealmList<Integer> usageHistoryDay; // how much water has been used each day (L), most recent day is first in list
+    public Date lastUpdate;
 
     public Appliance(String location, Date date, float amount, String username, boolean isChanged) {
         this.username = username;
@@ -30,6 +33,9 @@ public class Appliance extends RealmObject {
         this.date = date;
         this.amount = amount;
         this.isChanged = isChanged;
+        usageHistoryDay = new RealmList<Integer>();
+        usageHistoryDay.add(0, 0);
+        this.lastUpdate = date;
     }
 
 
