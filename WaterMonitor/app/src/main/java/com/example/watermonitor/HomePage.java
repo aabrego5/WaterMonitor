@@ -92,15 +92,15 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        realtime = (Button) findViewById(R.id.realtime);
-        about.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                Intent intent = new Intent(HomePage.this,RealTime.class);
-                startActivity(intent);
-
-            }
-        });
+//        realtime = (Button) findViewById(R.id.realtime);
+//        about.setOnClickListener(new View.OnClickListener() {
+//
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HomePage.this,RealTime.class);
+//                startActivity(intent);
+//
+//            }
+//        });
 
 
         //Create a welcome message using the entered username
