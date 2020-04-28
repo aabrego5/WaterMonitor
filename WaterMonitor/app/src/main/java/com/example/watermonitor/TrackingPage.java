@@ -34,27 +34,29 @@ public class TrackingPage extends AppCompatActivity {
     TextView title, titleToday, titleThisWeek, titleThisMonth, titleThisYear, titleYears;
     Button option1, option2, option3, home;
     LineChartView lineChartViewToday;
-    LineChartView lineChartViewThisWeek;
-    LineChartView lineChartViewThisMonth;
-    LineChartView lineChartViewThisYear;
-    LineChartView lineChartViewYears;
+//    LineChartView lineChartViewThisWeek;
+//    LineChartView lineChartViewThisMonth;
+//    LineChartView lineChartViewThisYear;
+//    LineChartView lineChartViewYears;
     String[] axisDataToday = {"12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm",
             "9pm", "10pm", "11pm"};
     int[] yAxisDataToday = {5, 2, 1, 3, 2, 6, 5, 4, 5, 1, 9, 1};
 
 
-    String[] axisDataThisWeek = {"M", "Tu", "W", "Th", "F", "Sa", "Su"};
-    int[] yAxisDataThisWeek = {50, 20, 15, 30, 40, 50, 40};
 
-    String[] axisDataThisMonth = {"W1", "W2", "W3", "W4"};
-    int[] getyAxisDataThisMonth = {15, 10, 15, 20};
 
-    String[] axisDataThisYear = {"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept",
-            "Oct", "Nov", "Dec"};
-    int[] yAxisDataThisYear = {50, 20, 15, 30, 20, 60, 15, 40, 45, 10, 90, 18};
-
-    String[] axisDataYears = {"2018", "2019", "2020"};
-    int[] yAxisDataYears = {250, 200, 150};
+//    String[] axisDataThisWeek = {"M", "Tu", "W", "Th", "F", "Sa", "Su"};
+//    int[] yAxisDataThisWeek = {50, 20, 15, 30, 40, 50, 40};
+//
+//    String[] axisDataThisMonth = {"W1", "W2", "W3", "W4"};
+//    int[] getyAxisDataThisMonth = {15, 10, 15, 20};
+//
+//    String[] axisDataThisYear = {"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept",
+//            "Oct", "Nov", "Dec"};
+//    int[] yAxisDataThisYear = {50, 20, 15, 30, 20, 60, 15, 40, 45, 10, 90, 18};
+//
+//    String[] axisDataYears = {"2018", "2019", "2020"};
+//    int[] yAxisDataYears = {250, 200, 150};
     //LineChartData dataYears;
 
     TextView tvProgressLabel;
@@ -138,18 +140,18 @@ public class TrackingPage extends AppCompatActivity {
 
 
         lineChartViewToday = findViewById(R.id.chartToday);
-        lineChartViewThisWeek = findViewById(R.id.chartThisWeek);
-        lineChartViewThisMonth = findViewById(R.id.chartThisMonth);
-        lineChartViewThisYear = findViewById(R.id.chartThisYear);
-        lineChartViewYears = findViewById(R.id.chartYears);
+//        lineChartViewThisWeek = findViewById(R.id.chartThisWeek);
+//        lineChartViewThisMonth = findViewById(R.id.chartThisMonth);
+//        lineChartViewThisYear = findViewById(R.id.chartThisYear);
+//        lineChartViewYears = findViewById(R.id.chartYears);
 
 
         //yAxisLimit needs to be appropriately adjusted
         display(axisDataToday, yAxisDataToday, lineChartViewToday, 10);
-        display(axisDataThisWeek, yAxisDataThisWeek, lineChartViewThisWeek, 60);
-        display(axisDataThisMonth, getyAxisDataThisMonth, lineChartViewThisMonth, 40);
-        display(axisDataThisYear, yAxisDataThisYear, lineChartViewThisYear, 100);
-        display(axisDataYears, yAxisDataYears, lineChartViewYears, 300);
+//        display(axisDataThisWeek, yAxisDataThisWeek, lineChartViewThisWeek, 60);
+//        display(axisDataThisMonth, getyAxisDataThisMonth, lineChartViewThisMonth, 40);
+//        display(axisDataThisYear, yAxisDataThisYear, lineChartViewThisYear, 100);
+//        display(axisDataYears, yAxisDataYears, lineChartViewYears, 300);
 
         SeekBar seekBar = findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
