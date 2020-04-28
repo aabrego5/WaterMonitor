@@ -24,7 +24,7 @@ public class Appliance extends RealmObject {
 //    public ArrayList<Integer> app_data_per_month = new ArrayList<Integer>();
 //    public ArrayList<Integer> app_data_per_week = new ArrayList<Integer>();
 //    public ArrayList<Integer> app_data_per_day = new ArrayList<Integer>();
-    public RealmList<Integer> usageHistoryDay; // how much water has been used each day (L), most recent day is first in list
+    public RealmList<Integer> usageHistoryDay; // how much water has been used each hour (L), most recent hour is first in list
     public Date lastUpdate;
 
     public Appliance(String location, Date date, float amount, String username, boolean isChanged) {

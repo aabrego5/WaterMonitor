@@ -113,7 +113,7 @@ public class ValveAdjustmentPage extends AppCompatActivity {
                         realm.beginTransaction();
                         Appliance app = realm.where(Appliance.class).contains("username", LoginPage.check_username).contains("appliance", "Sink").findFirst();
                         long diff = (date.getTime() - app.lastUpdate.getTime()) / 1000;
-                        if (diff >= 86400) {
+                        if (diff >= 3600) {
                             app.usageHistoryDay.add(0, 0);
                             app.lastUpdate = date;
                         }
